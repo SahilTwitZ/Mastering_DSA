@@ -12,6 +12,7 @@ public:
     }
 };
 
+
 // Function to reverse k nodes in a linked list
 Node* kReverse(Node* head, int k) {
     // Base case
@@ -41,6 +42,7 @@ Node* kReverse(Node* head, int k) {
     // Step 3: Return the head of the reversed list
     return prev;
 }
+
 
 // Function to print the linked list
 void printList(Node* head) {
