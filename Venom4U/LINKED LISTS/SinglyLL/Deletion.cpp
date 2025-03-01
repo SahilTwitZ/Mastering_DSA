@@ -80,36 +80,42 @@ void InsertAtPostion(Node *&tail, Node *&head, int position, int d)
     temp->next = nodeToInsert;
 }
 
-void DeleteNode(int position, Node *&head)
-{
-
-    // deleting first or start node
-    if (position == 1)
-    {
+void DeleteNode(int position, Node *&head, Node *&tail) {
+    // Case 1: Deleting the first (head) node
+    if (position == 1) {
         Node *temp = head;
         head = head->next;
-        // memory free start node
         temp->next = NULL;
         delete temp;
-    }
-    else
-    {
-        // deleting any middle node or last node
-        Node *curr = head;
-        Node *prev = NULL;
 
-        int cnt = 1;
-        while (cnt < position)
-        {
-            prev = curr;
-            curr = curr->next;
-            cnt++;
+        // If the list is now empty, update tail to NULL as well
+        if (head == NULL) {
+            tail = NULL;
         }
-        prev->next = curr->next;
-        curr->next = NULL;
-        delete curr;
+        return;
     }
+
+    // Case 2: Deleting a middle or last node
+    Node *curr = head;
+    Node *prev = NULL;
+    int cnt = 1;
+
+    while (cnt < position) {
+        prev = curr;
+        curr = curr->next;
+        cnt++;
+    }
+
+    // If the deleted node is the last node, update `tail`
+    if (curr->next == NULL) {
+        tail = prev;
+    }
+
+    prev->next = curr->next;
+    curr->next = NULL;
+    delete curr;
 }
+
 
 // printing
 void print(Node *&head)
@@ -151,7 +157,7 @@ int main()
     cout << "Head: " << head->data << endl;
     cout << "Tail: " << tail->data << endl;
 
-    DeleteNode(3, head);
+    DeleteNode(4, head, tail);
     print(head);
 
     // handle tail when you are deleting the last node ... kaise hoga ?
