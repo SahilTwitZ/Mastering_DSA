@@ -168,5 +168,21 @@ using namespace std;
 // }
 
 
+// //find minimum element in an array using recursion
 
+int findMin(int arr[],int n){
+    if(n==1){
+        return arr[0];
+    }
+    int mini = findMin(arr,n-1);
+    return min(arr[n-1], mini);
+}
+
+int main(){
+    int arr[] = {1,3,-1,0};
+    int n = 4;
+    int min = findMin(arr,n);
+    cout<<min<<endl;
+    return 0;
+}
 
